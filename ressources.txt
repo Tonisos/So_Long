@@ -1,1 +1,5 @@
 https://harm-smits.github.io/42docs/libs/minilibx/introduction.html
+https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx
+https://github.com/madebypixel02/so_long
+https://tronche.com/gui/x/xlib/events/
+cc -framework OpenGL -framework AppKit  main.c get_map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libmlx.a && ./a.out big.ber
