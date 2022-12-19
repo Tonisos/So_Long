@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/19 13:28:44 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:06:45 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	main(int argc, char **argv)
 	}
 
 	mlx_put_image_to_window(data.mlx, data.mlx_wind, data.img, 0, 0);
+	
 	mlx_key_hook(data.mlx_wind, &handle_input, &data);
 	// mlx_loop(data.mlx);
 	// mlx_destroy_window(mlx_ptr, win_ptr);

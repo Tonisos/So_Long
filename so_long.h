@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:19 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/19 15:24:42 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:48:56 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ typedef struct s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct s_map {
+	int width;
+	int height;
+	int xp;
+	int yp;
+	int xe;
+	int ye;
+	
+	
+}				t_map;
 
 typedef struct s_rect
 {
