@@ -5,7 +5,7 @@ https://tronche.com/gui/x/xlib/events/
 cc -framework OpenGL -framework AppKit  main.c get_map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libmlx.a && ./a.out big.ber
 https://github.com/Swaforde/So_long
 
-
+https://github.com/S-LucasSerrano/so_long
 
 
 il faut compter le nombre de c  et on valide la fin que si tous les c sont collectes.

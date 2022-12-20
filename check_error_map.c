@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_data->map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:37 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/19 15:38:45 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:26:40 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,50 @@
 
 #include "so_long.h"
 
-int check_char(char **map, int C, int P, int E)
+int check_char(t_data *data, int C, int P, int E)
 {
 	int i;
 	int j;
 		
 	i = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
-				&& map[i][j] != 'E' && map[i][j] != 'P')
+			if (data->map[i][j] != '0' && data->map[i][j] != '1' && data->map[i][j] != 'C'
+				&& data->map[i][j] != 'E' && data->map[i][j] != 'P')
 				return (1);
-			if (map[i][j] == 'E')
+			if (data->map[i][j] == 'E')
 				E++;
-			if (map[i][j] == 'P')
+			if (data->map[i][j] == 'P')
 				P++;
-			if (map[i][j] == 'C')
+			if (data->map[i][j] == 'C')
 				C++;
 			j++;
 		}	
 		i++;
 	}
+	data->plant = C;
 	if (E != 1 || P != 1 || C < 1)
 		return (1);
 	return (0);
 }
 
-int check_close(char **map, char **argv)
+int check_close(t_data *data)
 {
 	int i;
 	int j;
 		
 	i = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			if ((i == 0 || i == get_height(argv) - 1) && map[i][j] != '1')
+			if ((i == 0 || i == data->height - 1) && data->map[i][j] != '1')
 				return (1);
-			if ((j == 0 || j == get_width(argv) - 1) && map[i][j] != '1')
+			if ((j == 0 || j == data->width - 1) && data->map[i][j] != '1')
 				return (1);
 			j++;
 		}	
@@ -77,11 +78,9 @@ int check_close(char **map, char **argv)
 	return (0);
 }
 
-int check_map(char **map)
+int	check_error_map(t_data *data)
 {
-
-
-
-
-	
+	if (check_close(data) || check_char(data, 0, 0, 0))
+		return (0);
+	return (1);
 }
