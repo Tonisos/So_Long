@@ -8,11 +8,10 @@ https://github.com/Swaforde/So_long
 https://github.com/S-LucasSerrano/so_long
 
 
-il faut compter le nombre de c  et on valide la fin que si tous les c sont collectes.
-a chaque fois quon pqss sur un c on change c par 0;
-=> une fonction qui compte le mobre de C a un instant t dans le tab.
-
-fin du jeu si compteur de c = 0 et joueur sur fin.
-
-
-backtrakking 
+-gerer mauvais arg
+_gerer free
+-gerer quitter proprement
+-gerer split
+_gerer quand je rajoute une ligne
+_gerer makefile
+_gerer fichier vide

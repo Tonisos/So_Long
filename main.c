@@ -6,36 +6,41 @@
 /*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/20 17:05:40 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:20:52 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	data_pix_put(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
+int display_message(char *c)
+{
+	int i;
 
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-	
-// }
-// int render_rect(t_data *data, t_rect rect)
-// {
-// 	int	i;
-// 	int j;
+	i = 0;
+	while (c[i])
+	{
+		write(1, &c[i], 1);
+		i++;
+	}
+	write(1, "\n", 1);	
+	return (0);
+}
 
-// 	i = rect.y;
-// 	while (i < rect.y + rect.height)
-// 	{
-// 		j = rect.x;
-// 		while (j < rect.x + rect.width)
-// 			data_pix_put(data, j++, i, rect.color);
-// 		++i;
-// 	}
-// 	return (0);
-// }
+int check_arg(int argc, char **argv)
+{
+	int	i;
 
+	i = 0;
+	if (argc != 2)
+		return (display_message("You need one and only one file"));
+	while (argv[1][i])
+		i++;
+	if (argv[1][i - 1] != 'r' || argv[1][i - 2] != 'e'
+		|| argv[1][i - 3] != 'b' || argv[1][i - 4] != '.')
+		return (display_message("This is not a .ber file"));
+
+	return (1);
+}
 
 
 int	handle_input(int keysym, t_data *data)
@@ -58,27 +63,22 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	
-	if (argc != 2)
+	data.nbrmouvement = 0;
+	if (!check_arg(argc, argv))
 		return (0);
-	
 	data.map = get_map(argv, &data);
+	data.testmap = get_map(argv, &data);
+	int i = 0;
+	while (data.map[i])
+		printf("%s\n", data.map[i++]);
 	if (!check_error_map(&data))
 		return (0);
 	data.mlx = mlx_init();
-	if (data.mlx == NULL)
-		return (1);
-	data.mlx_wind = mlx_new_window(data.mlx, 1920, 1080, "My first window!");
-	// data.img = mlx_xpm_file_to_image(data.mlx, "wall.xpm", &img_width, &img_height);
-	// data.img = mlx_new_image(data.mlx, 960, 540);
-	// data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
-	// void *img2 = mlx_xpm_file_to_image(data.mlx, "player.xpm", &img_width, &img_height);
-
+	// if (data.mlx == NULL)
+	// 	return (1);
+	data.mlx_wind = mlx_new_window(data.mlx, data.width * 64, data.height * 64, "My first window!");
 	init_map(&data, data.map);
-	// mlx_put_image_to_window(data.mlx, data.mlx_wind, data.img, 64, 64);
-	// mlx_put_image_to_window(data.mlx, data.mlx_wind, img2, 0, 0);
-	
 	mlx_key_hook(data.mlx_wind, &handle_input, &data);
 	mlx_loop(data.mlx);
-	// mlx_destroy_window(mlx_ptr, win_ptr);
 	return (0);
 }

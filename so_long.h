@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:19 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/20 17:02:23 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:42:51 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,27 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 # include "Get_next_line/get_next_line.h"
 # include "minilibx/mlx.h"
 
-
-
-// int	WIN_H = 1080;
-// int	WIN_W = 1920;
-
 typedef struct s_data {
 	void	*mlx;
-	char	**map;
 	void	*mlx_wind;
+	char	**map;
+	char 	**testmap;
+	int		xtestmap;
+	int		ytestmap;
 	void	*imgplayer;
 	int		xplayer;
 	int		yplayer;
 	int 	width;
 	int 	height;
 	int 	plant;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int		nbrmouvement;
 }				t_data;
 
-typedef struct s_map {
-	int width;
-	int height;
-	int xp;
-	int yp;
-	int xe;
-	int ye;
-	
-	
-}				t_map;
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int color;
-}	t_rect;
 
 
 void create_player(t_data *data, int x, int y);
@@ -74,11 +51,11 @@ void move_down(t_data *data);
 void move_right(t_data *data);
 
 int	check_error_map(t_data *data);
+int display_message(char *c);
 
-
+int check_rec(t_data *data);
 char **get_map(char **argv, t_data *data);
 int get_width(char **argv);
-int check_char(t_data *data, int C, int P, int E);
 int get_height(char **argv);
 int check_close(t_data *data);
 void create_img(t_data *data, char a, int x, int y);
