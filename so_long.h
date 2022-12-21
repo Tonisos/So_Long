@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:19 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/21 12:42:51 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:22:34 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void move_right(t_data *data);
 
 int	check_error_map(t_data *data);
 int display_message(char *c);
+int exit_game(t_data *data);
 
 int check_rec(t_data *data);
 char **get_map(char **argv, t_data *data);

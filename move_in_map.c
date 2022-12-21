@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:40:58 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/21 12:22:30 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:41:07 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void move_up(t_data *data)
 		init_map(data, data->map);
 	}
 	if (data->plant == 0 && data->map[data->yplayer - 1][data->xplayer ] == 'E')
-		 mlx_destroy_window(data->mlx, data->mlx_wind);
+	{
+		mlx_destroy_window(data->mlx, data->mlx_wind);
+		exit_game(data);
+	}
 }
 void move_left(t_data *data)
 {
@@ -40,7 +43,10 @@ void move_left(t_data *data)
 		init_map(data, data->map);
 	}
 	if (data->plant == 0 && data->map[data->yplayer][data->xplayer - 1] == 'E')
-		 mlx_destroy_window(data->mlx, data->mlx_wind);
+	{
+		mlx_destroy_window(data->mlx, data->mlx_wind);
+		exit_game(data);
+	}
 }
 
 void move_down(t_data *data)
@@ -56,7 +62,10 @@ void move_down(t_data *data)
 		init_map(data, data->map);
 	}
 	if (data->plant == 0 && data->map[data->yplayer + 1][data->xplayer] == 'E')
-		 mlx_destroy_window(data->mlx, data->mlx_wind);
+	{
+		mlx_destroy_window(data->mlx, data->mlx_wind);
+		exit_game(data);
+	}
 }
 void move_right(t_data *data)
 {
@@ -71,5 +80,8 @@ void move_right(t_data *data)
 		init_map(data, data->map);
 	}
 	if (data->plant == 0 && data->map[data->yplayer][data->xplayer + 1] == 'E')
-		 mlx_destroy_window(data->mlx, data->mlx_wind);
+	{
+		mlx_destroy_window(data->mlx, data->mlx_wind);
+		exit_game(data);
+	}
 }

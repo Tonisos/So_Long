@@ -79,7 +79,7 @@ int check_char(t_data *data, int C, int P, int E)
 	}
 	data->plant = C;
 	if (E != 1 || P != 1 || C < 1)
-		return (1);
+		return (display_message("You need one P, one E and at least 1 C"));
 	return (1);
 }
 
@@ -138,8 +138,6 @@ int	check_error_map(t_data *data)
 		return (0);
 	check_position_player(data);
 	backtraking(data, data->ytestmap, data->xtestmap);
-
-	i = 0;
 	while (data->testmap[i])
 	{
 		j = 0;
