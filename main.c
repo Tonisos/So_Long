@@ -6,15 +6,15 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 08:56:45 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:35:39 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int display_message(char *c)
+int	display_message(char *c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (c[i])
@@ -22,28 +22,33 @@ int display_message(char *c)
 		write(1, &c[i], 1);
 		i++;
 	}
-	write(1, "\n", 1);	
+	write(1, "\n", 1);
 	return (0);
 }
 
-int check_arg(int argc, char **argv)
+static int	check_arg(int argc, char **argv)
 {
 	int	i;
+	int	fd;
 
 	i = 0;
 	if (argc != 2)
 		return (display_message("You need one and only one file"));
+	fd = open(argv[1], O_RDONLY);
+	if (fd <= 0)
+	{
+		close(fd);
+		return (display_message("Cannot open this file"));
+	}
 	while (argv[1][i])
 		i++;
 	if (argv[1][i - 1] != 'r' || argv[1][i - 2] != 'e'
 		|| argv[1][i - 3] != 'b' || argv[1][i - 4] != '.')
 		return (display_message("This is not a .ber file"));
-
 	return (1);
 }
 
-
-int	handle_input(int keysym, t_data *data)
+static int	handle_input(int keysym, t_data *data)
 {
 	if (keysym == 53)
 	{
@@ -63,10 +68,10 @@ int	handle_input(int keysym, t_data *data)
 
 int	exit_game(t_data *data)
 {
-	int i;
+	int	i;
 
-	i = 0;	
-	while(data->map[i] && data->testmap[i])
+	i = 0;
+	while (data->map[i] && data->testmap[i])
 	{	
 		free (data->map[i]);
 		free (data->testmap[i]);
@@ -80,19 +85,19 @@ int	exit_game(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	
+
 	data.nbrmouvement = 0;
 	if (!check_arg(argc, argv))
 		return (0);
 	data.map = get_map(argv, &data);
 	data.testmap = get_map(argv, &data);
-	int i = 0;
 	if (!check_error_map(&data))
 		exit_game(&data);
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		exit_game(&data);
-	data.mlx_wind = mlx_new_window(data.mlx, data.width * 64, data.height * 64, "THE GAME !");
+	data.mlx_wind = mlx_new_window(data.mlx, data.width * 64, data.height * 64,
+			"THE GAME !");
 	init_map(&data, data.map);
 	mlx_hook(data.mlx_wind, 17, 1L << 2, exit_game, &data);
 	mlx_key_hook(data.mlx_wind, &handle_input, &data);

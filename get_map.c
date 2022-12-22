@@ -6,32 +6,18 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:42 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 10:02:28 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:37:54 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// int get_height(char **argv)
-// {
-// 	int height;
-// 	int	fd;
-
-// 	height = 0;
-// 	fd = open(argv[1], O_RDONLY);
-// 	while (get_next_line(fd))
-// 		height ++;
-// 	close (fd);
-// 	return (height);
-// }
-int get_height(char **argv)
+static int	get_height(char **argv, int i)
 {
-	int height;
-	int	fd;
-	char *lign;
-	int i;
+	int		height;
+	int		fd;
+	char	*lign;
 
-	i = 1;
 	height = 0;
 	fd = open(argv[1], O_RDONLY);
 	lign = get_next_line(fd);
@@ -40,73 +26,44 @@ int get_height(char **argv)
 		height++;
 	}
 	free(lign);
-	printf("%d\n", height);
 	while (i != 0)
 	{
 		lign = get_next_line(fd);
-		if (!lign )
+		if (!lign)
 			i = 0;
 		free(lign);
 		height ++;
-	printf("%d\n", i);
 	}
 	height --;
 	close (fd);
 	return (height);
 }
 
-int check_rec(t_data *data)
+int	check_rec(t_data *data)
 {
-	// int	i;
-	// int j;
-	// char *lign;
-	// int fd;
-	// int height;
+	int	i;
+	int	j;
 
-	// height = get_height(argv) - 1;
-	
-	// fd = open(argv[1], O_RDONLY);
-	// i = 0; 
-	// while (i < height)
-	// {
-	// 	lign = get_next_line(fd);
-	// 	j = 0;
-	// 	while (lign[j])
-	// 		j++;
-	// 	free (lign);
-	// 	if (j != width)
-	// 	{
-	// 		close(fd);
-	// 		return (0);
-	// 	}
-	// 	i++;
-	// }	
-	// return (1);
-	int i;
-	int j;
-	
 	i = 0;
-	while(data->map[i])
+	while (data->map[i])
 	{
 		j = 0;
 		while (data->map[i][j])
-			j++;	
+			j++;
 		if (j != data->width)
-			return(display_message("the map isn't a rectangle"));
+			return (display_message("the map isn't a rectangle"));
 		i++;
 	}
 	return (1);
 }
 
-int get_width(char **argv)
+static int	get_width(char **argv)
 {
-	int width;
-	int	fd;
-	char *lign;
-
+	int		width;
+	int		fd;
+	char	*lign;
 
 	width = 0;
-	
 	fd = open(argv[1], O_RDONLY);
 	lign = get_next_line(fd);
 	while (lign[width])
@@ -121,26 +78,23 @@ int get_width(char **argv)
 	return (--width);
 }
 
-char **get_map(char **argv, t_data *data)
+char	**get_map(char **argv, t_data *data)
 {
-	int	fd;
-	char **map;
-	char *lign;
-	int	width;
-	int	height;
-	int	i;
+	int		fd;
+	char	**map;
+	char	*lign;
+	int		i;
 
 	i = 0;
-	data->height = get_height(argv);
+	data->height = get_height(argv, 1);
 	data->width = get_width(argv);
 	if (data->width == 0)
 		return (NULL);
-	map = malloc(sizeof(char*) * (data->height));
+	map = malloc (sizeof(char *) * (data->height));
 	fd = open(argv[1], O_RDONLY);
-	while(i < data->height)
+	while (i < data->height)
 	{
 		map[i] = get_next_line(fd);
-		// printf("<<%p>>\n", map[i]);
 		if (map[i][data->width] == '\n')
 			map[i][data->width] = '\0';
 		i++;

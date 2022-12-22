@@ -6,13 +6,13 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:26:27 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 10:09:40 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:38:12 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void create_img(t_data *data, char a, int x, int y)
+static void	create_img(t_data *data, char a, int x, int y)
 {
 	if (a == 'P')
 		create_player(data, x, y);
@@ -26,14 +26,13 @@ void create_img(t_data *data, char a, int x, int y)
 		create_floor(data, x, y);
 }
 
-char *simple_itoa(t_data *data)
+static char	*simple_itoa(t_data *data)
 {
 	char	*str;
 	long	i;
-	long 	nbr;
+	long	nbr;
 
 	nbr = data->nbrmouvement;
-
 	i = 0;
 	while (nbr > 0)
 	{
@@ -53,14 +52,14 @@ char *simple_itoa(t_data *data)
 		nbr /= 10;
 	}
 	return (str);
-
 }
 
-int init_map(t_data *data, char  **map)
+int	init_map(t_data *data, char **map)
 {
-	int	 x;
-	int	 y;
-	char *str;
+	int		x;
+	int		y;
+	char	*str;
+
 	y = 0;
 	while (map[y])
 	{
@@ -76,5 +75,5 @@ int init_map(t_data *data, char  **map)
 	str = simple_itoa(data);
 	display_message(str);
 	free (str);
-	return 0;	
+	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_data->map.c                                        :+:      :+:    :+:   */
+/*   check_error_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 14:50:37 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/20 16:26:40 by amontalb         ###   ########.fr       */
+/*   Created: 2022/12/22 10:27:00 by amontalb          #+#    #+#             */
+/*   Updated: 2022/12/22 11:38:35 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void	backtraking(t_data *data, int y, int x)
 		data->testmap[y][x - 1] = '1';
 		backtraking(data, y, x - 1);
 	}
-
 	if (data->testmap[y + 1][x] != '1')
 	{
 		data->testmap[y + 1][x] = '1';
 		backtraking(data, y + 1, x);
 	}
-
 	if (data->testmap[y][x + 1] != '1')
 	{
 		data->testmap[y][x + 1] = '1';
@@ -39,18 +37,19 @@ void	backtraking(t_data *data, int y, int x)
 	data->testmap[y][x] = '1';
 }
 
-int check_char(t_data *data, int C, int P, int E)
+static int	check_char(t_data *data, int C, int P, int E)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	while (data->map[i])
+	int	i;
+	int	j;
+
+	i = -1;
+	while (data->map[++i])
 	{
-		j = 0;
-		while (data->map[i][j])
+		j = -1;
+		while (data->map[i][++j])
 		{
-			if (data->map[i][j] != '0' && data->map[i][j] != '1' && data->map[i][j] != 'C'
+			if (data->map[i][j] != '0' && data->map[i][j] != '1' &&
+				data->map[i][j] != 'C'
 				&& data->map[i][j] != 'E' && data->map[i][j] != 'P')
 				return (display_message("Wrong charactere in the map"));
 			if (data->map[i][j] == 'E')
@@ -59,9 +58,7 @@ int check_char(t_data *data, int C, int P, int E)
 				P++;
 			if (data->map[i][j] == 'C')
 				C++;
-			j++;
 		}	
-		i++;
 	}
 	data->plant = C;
 	if (E != 1 || P != 1 || C < 1)
@@ -69,11 +66,11 @@ int check_char(t_data *data, int C, int P, int E)
 	return (1);
 }
 
-int check_close(t_data *data)
+static int	check_close(t_data *data)
 {
-	int i;
-	int j;
-		
+	int	i;
+	int	j;
+
 	i = 0;
 	while (data->map[i])
 	{
@@ -91,11 +88,11 @@ int check_close(t_data *data)
 	return (1);
 }
 
-void check_position_player(t_data *data)
+static void	check_position_player(t_data *data)
 {
-	int i;
-	int j;
-		
+	int	i;
+	int	j;
+
 	i = 0;
 	while (data->map[i])
 	{
@@ -116,9 +113,9 @@ void check_position_player(t_data *data)
 
 int	check_error_map(t_data *data)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	if (!check_rec(data) || !check_close(data) || !check_char(data, 0, 0, 0))
 		return (0);
