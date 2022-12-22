@@ -6,7 +6,7 @@
 #    By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/14 14:50:30 by amontalb          #+#    #+#              #
-#    Updated: 2022/12/19 09:45:03 by amontalb         ###   ########.fr        #
+#    Updated: 2022/12/22 12:11:04 by amontalb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ NAME = so_long
 
 MLX_LIB = libmlx.a
 
-HEADERS = so_long.h
+HEADERS = so_long.h minilibx/mlx.h
 
-SOURCES = main.c 
+SOURCES = main.c check_error_map.c create_img.c init_map.c move_in_map.c \
+			get_map.c get_next_line/get_next_line.c \
+			get_next_line/get_next_line_utils.c \
 	
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -26,11 +28,12 @@ MLX_FLAGS = -framework OpenGL -framework AppKit
 
 all :    $(NAME)
 
-$(NAME) : $(OBJECTS)
-	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(MLX_LIB) -o $(NAME)
-	
 %.o : %.c $(HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME) : $(OBJECTS)
+		@$(CC) $(CFLAGS) $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+	
 
 clean :
 	$(RM) $(OBJECTS) 

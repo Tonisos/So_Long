@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:42 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 11:37:54 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:11:38 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	**get_map(char **argv, t_data *data)
 {
 	int		fd;
 	char	**map;
-	char	*lign;
 	int		i;
 
 	i = 0;
