@@ -6,7 +6,7 @@
 #    By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/14 14:50:30 by amontalb          #+#    #+#              #
-#    Updated: 2022/12/22 15:01:36 by amontalb         ###   ########.fr        #
+#    Updated: 2022/12/22 16:09:28 by amontalb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ clean :
 	$(RM) $(OBJECTS) 
 
 fclean : clean 
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(MLX_LIB)
 
 re : fclean
 	$(MAKE) all
