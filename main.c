@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 11:35:39 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:24:34 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ static int	check_arg(int argc, char **argv)
 
 	i = 0;
 	if (argc != 2)
-		return (display_message("You need one and only one file"));
+		return (display_message("Error\nYou need one and only one file"));
 	fd = open(argv[1], O_RDONLY);
 	if (fd <= 0)
 	{
 		close(fd);
-		return (display_message("Cannot open this file"));
+		return (display_message("Error\nCannot open this file"));
 	}
 	while (argv[1][i])
 		i++;
 	if (argv[1][i - 1] != 'r' || argv[1][i - 2] != 'e'
 		|| argv[1][i - 3] != 'b' || argv[1][i - 4] != '.')
-		return (display_message("This is not a .ber file"));
+		return (display_message("Error\nThis is not a .ber file"));
 	return (1);
 }
 
@@ -77,8 +77,10 @@ int	exit_game(t_data *data)
 		free (data->testmap[i]);
 		i++;
 	}
-	free (data->map);
-	free (data->testmap);
+	if (data->map)
+		free (data->map);
+	if (data->testmap)
+		free (data->testmap);
 	exit (0);
 }
 
@@ -90,6 +92,8 @@ int	main(int argc, char **argv)
 	if (!check_arg(argc, argv))
 		return (0);
 	data.map = get_map(argv, &data);
+	if (data.map == NULL)
+		exit_game(&data);
 	data.testmap = get_map(argv, &data);
 	if (!check_error_map(&data))
 		exit_game(&data);

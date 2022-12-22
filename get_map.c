@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:42 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 12:11:38 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:39:22 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ static int	get_height(char **argv, int i)
 	height = 0;
 	fd = open(argv[1], O_RDONLY);
 	lign = get_next_line(fd);
-	if (lign)
+	if (lign != NULL)
 	{
 		height++;
+		free(lign);
 	}
-	free(lign);
 	while (i != 0)
 	{
 		lign = get_next_line(fd);
 		if (!lign)
 			i = 0;
-		free(lign);
+		if (lign)
+			free(lign);
 		height ++;
 	}
 	height --;
@@ -51,7 +52,7 @@ int	check_rec(t_data *data)
 		while (data->map[i][j])
 			j++;
 		if (j != data->width)
-			return (display_message("the map isn't a rectangle"));
+			return (display_message("Error\nthe map isn't a rectangle"));
 		i++;
 	}
 	return (1);
@@ -66,9 +67,12 @@ static int	get_width(char **argv)
 	width = 0;
 	fd = open(argv[1], O_RDONLY);
 	lign = get_next_line(fd);
-	while (lign[width])
-		width ++;
-	free (lign);
+	if (lign)
+	{
+		while (lign[width])
+			width ++;
+		free (lign);
+	}
 	while (lign)
 	{
 		lign = get_next_line(fd);
@@ -87,8 +91,11 @@ char	**get_map(char **argv, t_data *data)
 	i = 0;
 	data->height = get_height(argv, 1);
 	data->width = get_width(argv);
-	if (data->width == 0)
-		return (NULL);
+	if (data->width <= 1 || data->height <= 1)
+	{
+		display_message("Error\nInvalid map");
+		return (0);
+	}
 	map = malloc (sizeof(char *) * (data->height));
 	fd = open(argv[1], O_RDONLY);
 	while (i < data->height)

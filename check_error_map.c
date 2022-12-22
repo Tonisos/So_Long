@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:00 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 11:38:35 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:15:41 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	check_char(t_data *data, int C, int P, int E)
 			if (data->map[i][j] != '0' && data->map[i][j] != '1' &&
 				data->map[i][j] != 'C'
 				&& data->map[i][j] != 'E' && data->map[i][j] != 'P')
-				return (display_message("Wrong charactere in the map"));
+				return (display_message("Error\nWrong charactere in the map"));
 			if (data->map[i][j] == 'E')
 				E++;
 			if (data->map[i][j] == 'P')
@@ -62,7 +62,7 @@ static int	check_char(t_data *data, int C, int P, int E)
 	}
 	data->plant = C;
 	if (E != 1 || P != 1 || C < 1)
-		return (display_message("You need one P, one E and at least 1 C"));
+		return (display_message("Error\nYou need one P, one E and min 1 C"));
 	return (1);
 }
 
@@ -78,9 +78,9 @@ static int	check_close(t_data *data)
 		while (data->map[i][j])
 		{
 			if ((i == 0 || i == data->height - 1) && data->map[i][j] != '1')
-				return (display_message("the map isn't closed"));
+				return (display_message("Error\nthe map isn't closed"));
 			if ((j == 0 || j == data->width - 1) && data->map[i][j] != '1')
-				return (display_message("the map isn't closed"));
+				return (display_message("Error\nthe map isn't closed"));
 			j++;
 		}	
 		i++;
@@ -127,7 +127,7 @@ int	check_error_map(t_data *data)
 		while (data->testmap[i][j])
 		{
 			if (data->testmap[i][j] == 'C' || data->testmap[i][j] == 'E')
-				return (display_message("Invalid map, no possible solution"));
+				return (display_message("Error\nInvalid map, no solution"));
 			j++;
 		}
 		i++;
