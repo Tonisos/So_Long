@@ -6,13 +6,13 @@
 #    By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/14 14:50:30 by amontalb          #+#    #+#              #
-#    Updated: 2022/12/22 14:23:56 by amontalb         ###   ########.fr        #
+#    Updated: 2022/12/22 15:01:36 by amontalb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-MLX_LIB = libmlx.a
+MLX_LIB = mlx/libmlx.a
 
 HEADERS = so_long.h minilibx/mlx.h
 
@@ -32,6 +32,7 @@ all :    $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJECTS)
+		${MAKE} -C ./mlx
 		$(CC) $(CFLAGS) $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 	
 

@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 14:42:20 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:31:12 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 		return (0);
 	data.map = get_map(argv, &data);
 	if (data.map == NULL)
-		exit_game(&data);
+		return (0);
 	data.testmap = get_map(argv, &data);
 	if (!check_error_map(&data))
 		exit_game(&data);

@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:19 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 14:41:56 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:19:52 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # include "get_next_line/get_next_line.h"
-# include "minilibx/mlx.h"
+# include "mlx/mlx.h"
 
 typedef struct s_data {
 	void	*mlx;
