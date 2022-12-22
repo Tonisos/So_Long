@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 13:24:34 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:42:20 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,10 @@ int	main(int argc, char **argv)
 		exit_game(&data);
 	data.mlx_wind = mlx_new_window(data.mlx, data.width * 64, data.height * 64,
 			"THE GAME !");
+	initial_img(&data);
 	init_map(&data, data.map);
 	mlx_hook(data.mlx_wind, 17, 1L << 2, exit_game, &data);
-	mlx_key_hook(data.mlx_wind, &handle_input, &data);
+	mlx_hook(data.mlx_wind, 2, 1L << 0, &handle_input, &data);
 	mlx_loop(data.mlx);
 	exit_game(&data);
 	return (0);

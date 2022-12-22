@@ -6,11 +6,28 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:26:27 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 11:38:12 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:46:27 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	initial_img(t_data *data)
+{
+	int		img_width;
+	int		img_height;	
+
+	data->imgwall = mlx_xpm_file_to_image(data->mlx, "sprites/wall.xpm",
+			&img_width, &img_height);
+	data->imgfloor = mlx_xpm_file_to_image(data->mlx, "sprites/floor.xpm",
+			&img_width, &img_height);
+	data->imgplant = mlx_xpm_file_to_image(data->mlx, "sprites/plant.xpm",
+			&img_width, &img_height);
+	data->imgdooropen = mlx_xpm_file_to_image(data->mlx, "sprites/dooropen.xpm",
+			&img_width, &img_height);
+	data->imgdoor = mlx_xpm_file_to_image(data->mlx, "sprites/door.xpm",
+			&img_width, &img_height);
+}
 
 static void	create_img(t_data *data, char a, int x, int y)
 {
@@ -61,6 +78,7 @@ int	init_map(t_data *data, char **map)
 	char	*str;
 
 	y = 0;
+	mlx_clear_window(data->mlx, data->mlx_wind);
 	while (map[y])
 	{
 		x = 0;

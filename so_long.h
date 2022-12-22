@@ -6,7 +6,7 @@
 /*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:19 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/22 11:44:19 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:41:56 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct s_data {
 	int		height;
 	int		plant;
 	int		nbrmouvement;
+	void	*imgwall;
+	void	*imgfloor;
+	void	*imgplant;
+	void	*imgdooropen;
+	void	*imgdoor;
 }				t_data;
 
 void	create_player(t_data *data, int x, int y);
@@ -55,5 +60,6 @@ int		check_rec(t_data *data);
 
 char	**get_map(char **argv, t_data *data);
 int		init_map(t_data *data, char **map);
+void	initial_img(t_data *data);
 
 #endif 

@@ -6,7 +6,7 @@
 #    By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/14 14:50:30 by amontalb          #+#    #+#              #
-#    Updated: 2022/12/22 12:11:04 by amontalb         ###   ########.fr        #
+#    Updated: 2022/12/22 14:23:56 by amontalb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ all :    $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJECTS)
-		@$(CC) $(CFLAGS) $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 	
 
 clean :
