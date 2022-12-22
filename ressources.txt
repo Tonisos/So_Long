@@ -15,3 +15,4 @@ _gerer free
 _gerer quand je rajoute une ligne
 _gerer makefile
 _gerer fichier vide
+gerer mauvais fichier

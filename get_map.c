@@ -3,27 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:42 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/21 12:48:16 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:02:28 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// int get_height(char **argv)
+// {
+// 	int height;
+// 	int	fd;
+
+// 	height = 0;
+// 	fd = open(argv[1], O_RDONLY);
+// 	while (get_next_line(fd))
+// 		height ++;
+// 	close (fd);
+// 	return (height);
+// }
 int get_height(char **argv)
 {
 	int height;
 	int	fd;
+	char *lign;
+	int i;
 
+	i = 1;
 	height = 0;
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd))
+	lign = get_next_line(fd);
+	if (lign)
+	{
+		height++;
+	}
+	free(lign);
+	printf("%d\n", height);
+	while (i != 0)
+	{
+		lign = get_next_line(fd);
+		if (!lign )
+			i = 0;
+		free(lign);
 		height ++;
+	printf("%d\n", i);
+	}
+	height --;
 	close (fd);
 	return (height);
 }
+
 int check_rec(t_data *data)
 {
 	// int	i;
@@ -80,9 +111,12 @@ int get_width(char **argv)
 	lign = get_next_line(fd);
 	while (lign[width])
 		width ++;
-	while (get_next_line(fd))
-		;
 	free (lign);
+	while (lign)
+	{
+		lign = get_next_line(fd);
+		free (lign);
+	}
 	close(fd);
 	return (--width);
 }
@@ -106,6 +140,7 @@ char **get_map(char **argv, t_data *data)
 	while(i < data->height)
 	{
 		map[i] = get_next_line(fd);
+		// printf("<<%p>>\n", map[i]);
 		if (map[i][data->width] == '\n')
 			map[i][data->width] = '\0';
 		i++;

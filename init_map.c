@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:26:27 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/21 12:22:52 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:09:40 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ char *simple_itoa(t_data *data)
 
 int init_map(t_data *data, char  **map)
 {
-	int x;
-	int y;
-	
+	int	 x;
+	int	 y;
+	char *str;
 	y = 0;
 	while (map[y])
 	{
@@ -73,6 +73,8 @@ int init_map(t_data *data, char  **map)
 		y++;
 	}
 	display_message("number of mouvement : ");
-	display_message(simple_itoa(data));
+	str = simple_itoa(data);
+	display_message(str);
+	free (str);
 	return 0;	
 }

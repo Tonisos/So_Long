@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:32 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/21 18:22:18 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 08:56:45 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ int	exit_game(t_data *data)
 {
 	int i;
 
-	i = -1;	
-	while(data->map[++i] && data->testmap[i])
+	i = 0;	
+	while(data->map[i] && data->testmap[i])
 	{	
 		free (data->map[i]);
 		free (data->testmap[i]);
+		i++;
 	}
 	free (data->map);
 	free (data->testmap);
@@ -91,10 +92,11 @@ int	main(int argc, char **argv)
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		exit_game(&data);
-	data.mlx_wind = mlx_new_window(data.mlx, data.width * 64, data.height * 64, "My first window!");
+	data.mlx_wind = mlx_new_window(data.mlx, data.width * 64, data.height * 64, "THE GAME !");
 	init_map(&data, data.map);
 	mlx_hook(data.mlx_wind, 17, 1L << 2, exit_game, &data);
 	mlx_key_hook(data.mlx_wind, &handle_input, &data);
 	mlx_loop(data.mlx);
+	exit_game(&data);
 	return (0);
 }

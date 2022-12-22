@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amontalb <amontalb@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: amontalb <amontalb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:50:19 by amontalb          #+#    #+#             */
-/*   Updated: 2022/12/21 18:22:34 by amontalb         ###   ########.fr       */
+/*   Updated: 2022/12/22 08:06:33 by amontalb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# include "Get_next_line/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 # include "minilibx/mlx.h"
 
 typedef struct s_data {

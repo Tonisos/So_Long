@@ -10,20 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// verifier que cest un rectangle
-// verifier que cest des murs autour
-// verifier chemin valide
-// • La carte doit contenir 1 sortie, au moins 1 item et 1 position de départ.
-
-// si erreur "Error\n" +message d'erreur expicite"
-
-// Votre carte peut être composée de ces 5 caractères :
-// 0 pour un emplacement vide,
-// 1 pour un mur,
-// C pour un item à collecter (C pour collectible),
-// E pour une sortie (E pour exit),
-// P pour la position de départ du personnage.
-
 #include "so_long.h"
 
 void	backtraking(t_data *data, int y, int x)
